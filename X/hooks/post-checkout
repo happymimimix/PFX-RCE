@@ -22,4 +22,4 @@ if [ ! -f "$MSBUILD_PATH" ]; then
   read -N 1
 fi
 
-cmd //c "$PWD/Build.bat" "$MSBUILD_PATH"
+cmd //c ".\\Build.bat" "$MSBUILD_PATH"
