@@ -22,6 +22,7 @@ echo "ERROR: msbuild.exe not found at expected location: $MSBUILD_PATH"
 read -N 1
 fi
 CMD <<END
+CD /d "%~dp0"
 del .\.vs /f /s /q
 rmdir .\.vs /s /q
 del .\Release /f /s /q
@@ -30,7 +31,8 @@ del .\PianoFromAbove\Release /f /s /q
 rmdir .\PianoFromAbove\Release /s /q
 del .\Piano-FX-Pro.exe /f /q
 del .\Piano-FX-Pro-SoftwareRendered.exe /f /q
-del .\Piano-FX-Pro-ExtendedAddressing.exe /f /q
+del .\Piano-FX-Pro-LimitedTrackColoring.exe /f /q
+del .\Piano-FX-Pro-ExtendedArrayIndexing.exe /f /q
 del .\Piano-FX-Pro-CHN.exe /f /q
 del .\Piano-FX-Pro-JPN.exe /f /q
 del .\Piano-FX-Pro-KOR.exe /f /q
@@ -39,12 +41,25 @@ del .\Piano-FX-Pro-RUS.exe /f /q
 del .\Piano-FX-Pro-ARN.exe /f /q
 del .\Piano-FX-Pro-DRN.exe /f /q
 del .\Piano-FX-Pro-HRG.exe /f /q
+del .\Piano-FX-Pro-i386.exe /f /q
+del .\Piano-FX-Pro-SoftwareRendered-i386.exe /f /q
+del .\Piano-FX-Pro-LimitedTrackColoring-i386.exe /f /q
+del .\Piano-FX-Pro-CHN-i386.exe /f /q
+del .\Piano-FX-Pro-JPN-i386.exe /f /q
+del .\Piano-FX-Pro-KOR-i386.exe /f /q
+del .\Piano-FX-Pro-KOP-i386.exe /f /q
+del .\Piano-FX-Pro-RUS-i386.exe /f /q
+del .\Piano-FX-Pro-ARN-i386.exe /f /q
+del .\Piano-FX-Pro-DRN-i386.exe /f /q
+del .\Piano-FX-Pro-HRG-i386.exe /f /q
 "$MSBUILD_PATH" .\Piano-FX-Pro.sln -t:Rebuild -p:Configuration=Release /p:Platform=x64
 copy .\Release\Piano-FX-Pro.exe .\Piano-FX-Pro.exe /v /y
 "$MSBUILD_PATH" .\Piano-FX-Pro.sln -t:Rebuild -p:Configuration=SoftwareRender /p:Platform=x64
 copy .\Release\Piano-FX-Pro-EnforcedSoftwareRendering.exe .\Piano-FX-Pro-EnforcedSoftwareRendering.exe /v /y
 "$MSBUILD_PATH" .\Piano-FX-Pro.sln -t:Rebuild -p:Configuration=LimitedColor /p:Platform=x64
 copy .\Release\Piano-FX-Pro-LimitedTrackColoring.exe .\Piano-FX-Pro-LimitedTrackColoring.exe /v /y
+"$MSBUILD_PATH" .\Piano-FX-Pro.sln -t:Rebuild -p:Configuration=BIG /p:Platform=x64
+copy .\Release\Piano-FX-Pro-ExtendedArrayIndexing.exe .\Piano-FX-Pro-ExtendedArrayIndexing.exe /v /y
 "$MSBUILD_PATH" .\Piano-FX-Pro.sln -t:Rebuild -p:Configuration=Chinese /p:Platform=x64
 copy .\Release\Piano-FX-Pro-CHN.exe .\Piano-FX-Pro-CHN.exe /v /y
 "$MSBUILD_PATH" .\Piano-FX-Pro.sln -t:Rebuild -p:Configuration=Japanese /p:Platform=x64
@@ -61,6 +76,28 @@ copy .\Release\Piano-FX-Pro-RUS.exe .\Piano-FX-Pro-RUS.exe /v /y
 copy .\Release\Piano-FX-Pro-ARN.exe .\Piano-FX-Pro-ARN.exe /v /y
 "$MSBUILD_PATH" .\Piano-FX-Pro.sln -t:Rebuild -p:Configuration=DoubleArinoglish /p:Platform=x64
 copy .\Release\Piano-FX-Pro-DRN.exe .\Piano-FX-Pro-DRN.exe /v /y
+"$MSBUILD_PATH" .\Piano-FX-Pro.sln -t:Rebuild -p:Configuration=Release /p:Platform=x64
+copy .\Release\Piano-FX-Pro.exe .\Piano-FX-Pro.exe /v /y
+"$MSBUILD_PATH" .\Piano-FX-Pro.sln -t:Rebuild -p:Configuration=SoftwareRender /p:Platform=x86
+copy .\Release\Piano-FX-Pro-EnforcedSoftwareRendering-i386.exe .\Piano-FX-Pro-EnforcedSoftwareRendering-i386.exe /v /y
+"$MSBUILD_PATH" .\Piano-FX-Pro.sln -t:Rebuild -p:Configuration=LimitedColor /p:Platform=x86
+copy .\Release\Piano-FX-Pro-LimitedTrackColoring-i386.exe .\Piano-FX-Pro-LimitedTrackColoring-i386.exe /v /y
+"$MSBUILD_PATH" .\Piano-FX-Pro.sln -t:Rebuild -p:Configuration=Chinese /p:Platform=x86
+copy .\Release\Piano-FX-Pro-CHN-i386.exe .\Piano-FX-Pro-CHN-i386.exe /v /y
+"$MSBUILD_PATH" .\Piano-FX-Pro.sln -t:Rebuild -p:Configuration=Japanese /p:Platform=x86
+copy .\Release\Piano-FX-Pro-JPN-i386.exe .\Piano-FX-Pro-JPN-i386.exe /v /y
+"$MSBUILD_PATH" .\Piano-FX-Pro.sln -t:Rebuild -p:Configuration=Hiragana /p:Platform=x86
+copy .\Release\Piano-FX-Pro-HRG-i386.exe .\Piano-FX-Pro-HRG-i386.exe /v /y
+"$MSBUILD_PATH" .\Piano-FX-Pro.sln -t:Rebuild -p:Configuration=Korean /p:Platform=x86
+copy .\Release\Piano-FX-Pro-KOR-i386.exe .\Piano-FX-Pro-KOR-i386.exe /v /y
+"$MSBUILD_PATH" .\Piano-FX-Pro.sln -t:Rebuild -p:Configuration=DPRK /p:Platform=x86
+copy .\Release\Piano-FX-Pro-KOP-i386.exe .\Piano-FX-Pro-KOP-i386.exe /v /y
+"$MSBUILD_PATH" .\Piano-FX-Pro.sln -t:Rebuild -p:Configuration=Russian /p:Platform=x86
+copy .\Release\Piano-FX-Pro-RUS-i386.exe .\Piano-FX-Pro-RUS-i386.exe /v /y
+"$MSBUILD_PATH" .\Piano-FX-Pro.sln -t:Rebuild -p:Configuration=Arinoglish /p:Platform=x86
+copy .\Release\Piano-FX-Pro-ARN-i386.exe .\Piano-FX-Pro-ARN-i386.exe /v /y
+"$MSBUILD_PATH" .\Piano-FX-Pro.sln -t:Rebuild -p:Configuration=DoubleArinoglish /p:Platform=x86
+copy .\Release\Piano-FX-Pro-DRN-i386.exe .\Piano-FX-Pro-DRN-i386.exe /v /y
 del .\.vs /f /s /q
 rmdir .\.vs /s /q
 del .\Release /f /s /q
